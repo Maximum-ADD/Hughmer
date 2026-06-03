@@ -1,0 +1,33 @@
+{
+  "name": "hughmer",
+  "version": "1.0.0",
+  "description": "A webapp that is used to warm up that funny bone, develop wit and fill in any developmental gaps from childhood regarding humour",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maximum-ADD/Hughmer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Maximum-ADD/Hughmer/issues"
+  },
+  "homepage": "https://github.com/Maximum-ADD/Hughmer#readme",
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "^8.0.16"
+  }
+}
