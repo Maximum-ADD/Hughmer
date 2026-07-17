@@ -7,12 +7,12 @@ export default function App() {
     <div>
         <h1>Hughmer (the app)</h1>
         <JokeCard />
-        <div>
+        {/* <div>
       {jokes.map(j => (
         <p key={j}>{j}</p>
       ))}
-        </div>  
-      <h1>Develop your humor today!</h1>
+        </div>   */}
+      {/* <h1>Develop your humor today!</h1>
     <h2>Development of humor</h2>
     <article>
         <section>
@@ -62,7 +62,7 @@ export default function App() {
     </article>
     <footer>
         <p><strong>Notes:</strong> Cognitive development (theory of mind, language, abstraction) and social experience drive these changes. Cultural norms, family, temperament, and neurodiversity create wide individual differences.</p>
-    </footer>
+    </footer> */}
     </div>
     
     )
