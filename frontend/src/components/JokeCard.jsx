@@ -63,10 +63,18 @@ export default function JokeCard() {
             {loading ? "Scoring..." : "Score my joke"}
         </button>
         {
-            score !== null && 
+            score === 'timeout' && (
+            <output className="text-center text-2xl font-bold text-red-400">
+            Timeout!! server is starting up. may be an over 60 second wait.
+            </output>
+            )
+        }
+        {
+            score !== null && score !== 'timeout' && (
             <output className="text-center text-2xl font-bold text-amber-400">
             Unpredictability score: {score}
             </output>
+            )
         }
     </section>
 )
