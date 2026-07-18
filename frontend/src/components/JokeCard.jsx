@@ -77,8 +77,8 @@ export default function JokeCard() {
         {
             score !== null && score !== 'timeout' && (
             <output className="text-center text-2xl font-bold text-amber-400">
-            Benign Violation score: {score}
-            Setup predictability: {setupScore}
+            Benign Violation score: {score} \n
+            Setup predictability: {setupScore} \n
             Punchline predictability: {punchlineScore}
             </output>
             )
