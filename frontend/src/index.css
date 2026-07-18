@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+:root {
+    --color-primary: #fbbf24;
+    --color-background: #000000;
+    --color-surface: rgba(255,255,255,0.05);
+    --color-text: #ffffff;
+    --color-text-muted: rgba(255,255,255,0.6);
+}
