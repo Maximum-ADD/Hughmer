@@ -8,15 +8,31 @@ export default function JokeCard() {
     const [loading, setLoading] = useState(false)
 
     async function handleScore(){
-        setLoading(true)
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/dad-joke-score`, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({setup, punchline})
-        })
-        const data = await res.json()
-        setScore(data.score)
-        setLoading(false)
+        try {
+            const controller = new AbortController()
+            const timeout = setTimeout(() => controller.abort, 10000)
+
+
+            setLoading(true)
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/dad-joke-score`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({setup, punchline}),
+                signal: controller.signal
+            })
+
+            clearTimeout(timeout)
+
+            const data = await res.json()
+            setScore(data.score)
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                setScore('timeout')
+            }
+            
+        } finally {
+            setLoading(false)
+        }
     }
     return (
     <section className= "bg-white/5 border border-white/10 rounded-2x1 p-8 flex flex-col gap-6">
