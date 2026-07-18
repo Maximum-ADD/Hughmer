@@ -6,7 +6,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center px-4 py-12">
         <h1  className="mb-12 text-center">Hughmer (the app)</h1>
-        <JokeCard className="w-full max-w-xl" />
+        <div className="w-full max-w-xl">
+            <JokeCard />
+        </div>
         {/* <div>
       {jokes.map(j => (
         <p key={j}>{j}</p>
