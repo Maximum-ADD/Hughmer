@@ -5,6 +5,9 @@ export default function JokeCard() {
     const [setup, setSetup] = useState("")
     const [punchline, setPunchline] = useState("")
     const [score, setScore] = useState(null)
+    const [setupScore, setSetupScore] = useState(null)
+    const [punchlineScore, setPunchlineScore] = useState(null)
+    
     const [loading, setLoading] = useState(false)
 
     async function handleScore(){
@@ -25,6 +28,8 @@ export default function JokeCard() {
 
             const data = await res.json()
             setScore(data.score)
+            setSetupScore(data.setup_score)
+            setPunchlineScore(data.punchline_score)
         } catch (error) {
             if (error.name === 'AbortError') {
                 setScore('timeout')
@@ -72,7 +77,9 @@ export default function JokeCard() {
         {
             score !== null && score !== 'timeout' && (
             <output className="text-center text-2xl font-bold text-amber-400">
-            Unpredictability score: {score}
+            Benign Violation score: {score}
+            Setup predictability: {setupScore}
+            Punchline predictability: {punchlineScore}
             </output>
             )
         }

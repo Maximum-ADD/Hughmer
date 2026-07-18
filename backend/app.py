@@ -9,8 +9,14 @@ def score():
     data = flask.request.get_json()
     setup = data.get('setup', '')
     punchline = data.get('punchline', '')
+    setup_score = model.find_probability_score(setup)
+    punchline_score = model.find_probability_score(punchline)
     result = model.score_joke(setup, punchline)
-    return flask.jsonify({'score' : result})
+    return flask.jsonify({
+        'score' : result,
+        'setup_score' : setup_score,
+        'punchline_score' : punchline_score
+                          })
 
 # @app.route('/<name>')
 # def print_name(name):
