@@ -19,28 +19,39 @@ export default function JokeCard() {
         setLoading(false)
     }
     return (
-    <section>
-        <h2>Test your joke</h2>
-        <label>
+    <section className= "bg-white/5 border border-white/10 rounded-2x1 p-8 flex flex-col gap-6">
+        <h2 className="text-xl font-semibold text-amber-400">Test your joke</h2>
+        <label className="flex flex-col gap-2 text-sm text-white/60">
             Setup
             <input
                 placeholder="Setup..."
                 value={setup}
                 onChange={e => setSetup(e.target.value)}
+                className="bg-black border border-white/20 rounded-lg px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-amber-400"
             />
         </label>
-        <label>
+        <label className="flex flex-col gap-2 text-sm text-white/60">
             Punchline
             <input
                 placeholder="Punchline..."
                 value={punchline}
                 onChange={e => setPunchline(e.target.value)}
+                className="bg-black border border-white/20 rounded-lg px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-amber-400"
+
             />
         </label>
-        <button onClick={handleScore}>
+        <button 
+        onClick={handleScore} 
+        className="bg-amber-400 text-black font-bold py-3 rounded-lg hover:bg-amber-300 transition-colors"
+        >
             {loading ? "Scoring..." : "Score my joke"}
         </button>
-        {score !== null && <output>Unpredictability score: {score}</output>}
+        {
+            score !== null && 
+            <output className="text-center text-2xl font-bold text-amber-400">
+            Unpredictability score: {score}
+            </output>
+        }
     </section>
 )
 }

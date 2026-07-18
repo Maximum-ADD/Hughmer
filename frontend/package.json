@@ -8,7 +8,6 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
-
   },
   "repository": {
     "type": "git",
@@ -23,8 +22,10 @@
   },
   "homepage": "https://github.com/Maximum-ADD/Hughmer#readme",
   "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.0.2",
