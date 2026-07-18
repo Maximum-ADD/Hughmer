@@ -76,15 +76,17 @@ export default function JokeCard() {
         }
         {
             score !== null && score !== 'timeout' && (
-            <output className="text-center text-2xl font-bold text-amber-400">
-            Benign Violation score: {score} 
-            </output>,
-            <output className="text-center text-2xl font-bold text-amber-400">
-            Setup predictability: {setupScore}
-            </output>,
-            <output className="text-center text-2xl font-bold text-amber-400">
-            Punchline predictability: {punchlineScore}
-            </output>
+            <>
+                <output className="text-center text-2xl font-bold text-amber-400">
+                Benign Violation score: {score} 
+                </output>
+                <output className="text-center text-xl font-bold text-white/70">
+                Setup predictability: {setupScore}
+                </output>
+                <output className="text-center text-xl font-bold text-white/70">
+                Punchline predictability: {punchlineScore}
+                </output>
+            </>
 
             )
         }
