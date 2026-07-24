@@ -13,7 +13,7 @@ export default function JokeCard() {
     async function handleScore(){
         try {
             const controller = new AbortController()
-            const timeout = setTimeout(() => controller.abort, 10000)
+            const timeout = setTimeout(() => controller.abort(), 10000)
 
 
             setLoading(true)
