@@ -61,12 +61,12 @@ def find_probability_score(text, word_totals, total_words):
         total_probability +=  probability
 
     ave_probability = total_probability/ len(words)
-    score = round(logit(ave_probability),2)
+    score = round(ave_probability,5)
     return score
 
 def score_joke(setup, punchline):
-    setup_score = find_probability_score(setup, setup_word_totals, setup_total_words)
-    punchline_score = find_probability_score(punchline, punchline_word_totals, punchline_total_words)
+    setup_score = logit(find_probability_score(setup, setup_word_totals, setup_total_words))
+    punchline_score = logit(find_probability_score(punchline, punchline_word_totals, punchline_total_words))
     # scored like this because a setup should usually be preditable 
     # while a puchline should be unpredictable . 
     # this is a reference to the benign violation theory of humor
