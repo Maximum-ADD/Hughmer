@@ -15,8 +15,8 @@ def logit(p):
     except ValueError:
         return 0
 def categorise_joke(setup_score, punchline_score):
-    high_setup = setup_score > 0.004
-    high_punchline = punchline_score > 0.003
+    high_setup = setup_score > 0.0025
+    high_punchline = punchline_score > 0.0025
 
     if high_setup and not high_punchline:
         return "Funny! 😂"
