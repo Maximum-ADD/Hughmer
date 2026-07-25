@@ -93,7 +93,7 @@ else:
     # word frequency for the punchlines below. will be used for probabilities later
     punchline_all_words = []
     for punchline in df["response"]:
-        cleaned_response = clean_text(str(punchline), False)
+        cleaned_response = clean_text(str(punchline))
         punchline_all_words.extend(cleaned_response)
 
     punchline_word_totals = coll.Counter(punchline_all_words)
