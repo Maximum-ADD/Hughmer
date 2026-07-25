@@ -10,20 +10,42 @@ import os
 
 
 
-nltk.download("stopwords")
-STOP_WORDS = set(nltk.corpus.stopwords.words("english"))
+# nltk.download("stopwords")
+STOP_WORDS ={
+    # Stopword list based off of nltk augmented for better use in jokes
+    # articles
+    'a', 'an', 'the',
+    # pronouns
+    'i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves',
+    'you', 'your', 'yours', 'yourself', 'yourselves',
+    'he', 'him', 'his', 'himself', 'she', 'her', 'hers', 'herself',
+    'it', 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves',
+    # linking verbs
+    'is', 'are', 'was', 'were', 'be', 'been', 'being', 'am',
+    'has', 'have', 'had', 'having', 'do', 'does', 'did', 'doing',
+    # prepositions
+    'at', 'by', 'for', 'in', 'of', 'on', 'to', 'with', 'from',
+    'into', 'through', 'during', 'above', 'below', 'between',
+    'under', 'over', 'out', 'off', 'up', 'down',
+    # conjunctions
+    'and', 'or', 'but', 'both', 'each',
+    # other filler
+    'as', 'an', 'this', 'that', 'these', 'those', 'then',
+    'there', 'here', 'than', 'same', 'other', 'such',
+    # contractions/fragments
+    'd', 'll', 'm', 'o', 're', 's', 't', 'y', 'ma', 've',
+}#set(nltk.corpus.stopwords.words("english"))
 
-def clean_text(text, stopword_removal=True):
+def clean_text(text):
     text = text.lower()
     text = re.sub(r'[^a-z0-9\s]', '', text)
     words = text.split()
     # remove stopwords
-    if stopword_removal:
-        words = [word for word in words if word not in STOP_WORDS]
+    words = [word for word in words if word not in STOP_WORDS]
     return words
 
-def find_probability_score(text, word_totals, total_words, stopword_removal=True):
-    words = clean_text(text, stopword_removal)
+def find_probability_score(text, word_totals, total_words):
+    words = clean_text(text)
     
     if not words:
         return 0
@@ -40,8 +62,8 @@ def find_probability_score(text, word_totals, total_words, stopword_removal=True
     return score
 
 def score_joke(setup, punchline):
-    setup_score = find_probability_score(setup, setup_word_totals, setup_total_words, True)
-    punchline_score = find_probability_score(punchline, punchline_word_totals, punchline_total_words, False)
+    setup_score = find_probability_score(setup, setup_word_totals, setup_total_words)
+    punchline_score = find_probability_score(punchline, punchline_word_totals, punchline_total_words)
     # scored like this because a setup should usually be preditable 
     # while a puchline should be unpredictable . 
     # this is a reference to the benign violation theory of humor
@@ -50,7 +72,7 @@ def score_joke(setup, punchline):
 
 
 
-CACHE_FILE = 'word_counts_v2.pkl'
+CACHE_FILE = 'word_counts.pkl'
 
 if os.path.exists(CACHE_FILE):
     print("Loading from cache...")

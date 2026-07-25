@@ -9,8 +9,8 @@ def score():
     data = flask.request.get_json()
     setup = data.get('setup', '')
     punchline = data.get('punchline', '')
-    setup_score = model.find_probability_score(setup, model.setup_word_totals, model.setup_total_words, True)
-    punchline_score = model.find_probability_score(punchline, model.punchline_word_totals, model.punchline_total_words, False)
+    setup_score = model.find_probability_score(setup, model.setup_word_totals, model.setup_total_words)
+    punchline_score = model.find_probability_score(punchline, model.punchline_word_totals, model.punchline_total_words)
     result = model.score_joke(setup, punchline)
     return flask.jsonify({
         'score' : result,
