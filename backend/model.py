@@ -7,12 +7,15 @@ import nltk
 import pickle
 import os
 
+import math
 
+def logit(p):
+    return math.log(p / (1 - p))
 
 
 # nltk.download("stopwords")
 STOP_WORDS ={
-    # Stopword list based off of nltk augmented for better use in jokes
+    # Stopword list based off of nltk. augmented for better use in jokes
     # articles
     'a', 'an', 'the',
     # pronouns
@@ -58,7 +61,7 @@ def find_probability_score(text, word_totals, total_words):
         total_probability +=  probability
 
     ave_probability = total_probability/ len(words)
-    score = round(ave_probability*1000,2)
+    score = round(logit(ave_probability),2)
     return score
 
 def score_joke(setup, punchline):
@@ -87,9 +90,6 @@ else:
     dad_jokes_dataset  = dts.load_dataset("shuttie/dadjokes", split="train")
     df = dad_jokes_dataset.to_pandas()
 
-    # print(f"Loaded {len(df)} jokes")
-    # print(df.head())
-
     # word frequency for the punchlines below. will be used for probabilities later
     punchline_all_words = []
     for punchline in df["response"]:
@@ -98,11 +98,6 @@ else:
 
     punchline_word_totals = coll.Counter(punchline_all_words)
     punchline_total_words = len(punchline_all_words)
-
-    # print(f"Vocab size: {len(word_totals)} unique words")
-    # print(f"total words: {total_words}")
-
-
 
     # setup words frequency below.
 
