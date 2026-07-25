@@ -10,8 +10,22 @@ import os
 import math
 
 def logit(p):
-    return math.log(p / (1 - p))
+    try:
+        return math.log(p / (1 - p))
+    except ValueError:
+        return 0
+def categorise_joke(setup_score, punchline_score):
+    high_setup = setup_score > 0.004
+    high_punchline = punchline_score > 0.003
 
+    if high_setup and not high_punchline:
+        return "Funny! 😂"
+    elif high_setup and high_punchline:
+        return "not that Funny 🙂"
+    elif not high_setup and not high_punchline:
+        return "this is either Avant-Garde or just confusing"
+    else:
+        return "that was a let down 😐"
 
 # nltk.download("stopwords")
 STOP_WORDS ={
@@ -49,11 +63,11 @@ def clean_text(text):
 
 def find_probability_score(text, word_totals, total_words):
     words = clean_text(text)
-    
+    vocab = len(word_totals)  
     if not words:
-        return 0
+        return 1 / (total_words + vocab)
     # using laplace smoothing
-    vocab = len(word_totals)
+
     total_probability = 0
     for word in words:
         word_freq = word_totals.get(word,0)
@@ -65,8 +79,12 @@ def find_probability_score(text, word_totals, total_words):
     return score
 
 def score_joke(setup, punchline):
-    setup_score = logit(find_probability_score(setup, setup_word_totals, setup_total_words))
-    punchline_score = logit(find_probability_score(punchline, punchline_word_totals, punchline_total_words))
+    setup_prob = find_probability_score(setup, setup_word_totals, setup_total_words)
+    punchline_prob = find_probability_score(punchline, punchline_word_totals, punchline_total_words)
+
+    setup_score = logit(max(min(setup_prob, 0.9999), 0.0001))
+    punchline_score = logit(max(min(punchline_prob, 0.9999), 0.0001))
+
     # scored like this because a setup should usually be preditable 
     # while a puchline should be unpredictable . 
     # this is a reference to the benign violation theory of humor

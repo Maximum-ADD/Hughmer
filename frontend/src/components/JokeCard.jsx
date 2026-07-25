@@ -1,15 +1,14 @@
 import { useState } from "react"
 
-
 export default function JokeCard() {
     const [setup, setSetup] = useState("")
     const [punchline, setPunchline] = useState("")
     const [score, setScore] = useState(null)
     const [setupScore, setSetupScore] = useState(null)
     const [punchlineScore, setPunchlineScore] = useState(null)
-    
-    const [loading, setLoading] = useState(false)
+    const [comment, setComment] = useState("")
 
+    const [loading, setLoading] = useState(false)
     async function handleScore(){
         try {
             const controller = new AbortController()
@@ -27,9 +26,11 @@ export default function JokeCard() {
             clearTimeout(timeout)
 
             const data = await res.json()
+            console.log(data)
             setScore(data.score)
             setSetupScore(data.setup_score)
             setPunchlineScore(data.punchline_score)
+            setComment(data.comment)
         } catch (error) {
             if (error.name === 'AbortError') {
                 setScore('timeout')
@@ -40,7 +41,7 @@ export default function JokeCard() {
         }
     }
     return (
-    <section className= "bg-white/5 border border-white/10 rounded-2x1 p-8 flex flex-col gap-6">
+    <section className= "bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col gap-6">
         <h2 className="text-xl font-semibold text-amber-400">Test your joke</h2>
         <label className="flex flex-col gap-2 text-sm text-white/60">
             Setup
@@ -79,6 +80,9 @@ export default function JokeCard() {
             <>
                 <output className="text-center text-2xl font-bold text-amber-400">
                 Benign Violation score: {score} 
+                </output>
+                <output className="text-center text-2xl font-bold text-amber-400">
+                {comment} 
                 </output>
                 <output className="text-center text-xl font-bold text-white/70">
                 Setup predictability: {setupScore}
